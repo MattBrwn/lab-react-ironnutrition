@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import 'bulma/css/bulma.css';
+import foods from './foods.json';
+import FoodBox from './components/FoodBox'
+import Foods from './components/Foods'
 
-function App() {
+class App extends Component {
+
+// state = {
+//   totalFoods: []
+// }
+
+handleAddFood = (food, quantity) => {
+  let newfood = {
+    name: food.name,
+    image: food.image,
+    calories: food.calories
+  }
+  this.setState({
+    foods: [...this.state.foods, newfood]
+  })
+}
+
+render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Foods onItemAdd={this.handleAddFood}/>
     </div>
   );
+}
 }
 
 export default App;
